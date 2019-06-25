@@ -52,5 +52,5 @@ if __name__ == '__main__':
     k = 3
     predict = kNN(X, X_train, y_train, k)
     print(predict)
-    draw(X_train, y_train, X)
+    draw(X_train, X)
 
