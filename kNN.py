@@ -3,7 +3,6 @@ import collections
 import matplotlib.pyplot as plt
 
 
-# kNN 没有显式学习过程
 def kNN(X, X_train, y_train, n):
     # 求前 N 个点到 X 的距离
     knnList = []
@@ -26,7 +25,7 @@ def kNN(X, X_train, y_train, n):
     return maxCount
 
 
-def draw(X_train, y_train, X):
+def draw(X_train, X):
     # 数据点
     plt.plot(X_train[:5, 0], X_train[:5, 1], 'go', label='1')
     plt.plot(X_train[6:, 0], X_train[6:, 1], 'ro', label='-1')
