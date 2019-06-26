@@ -21,7 +21,6 @@ class KdTree(object):
     def __init__(self, data):
         # 数据维度
         k = len(data[0])
-
         # 按第 split 维划分数据集 exset 创建KdNode
         def CreateNode(split, dataSet):
             dataSet = list(dataSet)
@@ -39,12 +38,10 @@ class KdTree(object):
             median = dataSet[splitPos]
             # cycle coordinates
             splitNext = (split + 1) % k
-
             # 递归的创建 kd 树
             return KdNode(median, split,
                           CreateNode(splitNext, dataSet[:splitPos]),
                           CreateNode(splitNext, dataSet[splitPos + 1:]))
-
         # 从第0维分量开始构建 kd 树，返回根节点
         self.root = CreateNode(0, data)
 
@@ -62,12 +59,10 @@ def preorder(root):
 def findNearest(tree, point, result):
     # 数据维度
     k = len(point)
-
     def travel(kd_node, target, maxDist):
         if kd_node is None:
             # python 中用 float("inf") 和 float("-inf") 表示正负无穷
             return result([0] * k, float("inf"), 0)
-
         nodesVisited = 1
         # 进行分割的维度
         s = kd_node.split
@@ -90,9 +85,7 @@ def findNearest(tree, point, result):
         nearest = temp1.nearestPoint
         # 更新最近距离
         dist = temp1.nearestDistance
-
         nodesVisited += temp1.nodesVisited
-
         if dist < maxDist:
             # 最近点将在以目标点为球心，maxDist 为半径的超球体内
             maxDist = dist
@@ -102,10 +95,8 @@ def findNearest(tree, point, result):
         if maxDist < tempDist:
             # 不相交则可以直接返回，不用继续判断
             return result(nearest, dist, nodesVisited)
-
         # 计算目标点与分割点的欧氏距离
         tempDist = sqrt(sum((p1 - p2) ** 2 for p1, p2 in zip(pivot, target)))
-
         if tempDist < dist:
             # 更新最近点
             nearest = pivot
@@ -113,10 +104,8 @@ def findNearest(tree, point, result):
             dist = tempDist
             # 更新超球体半径
             maxDist = dist
-
         # 检查另一个子结点对应的区域是否有更近的点
         temp2 = travel(further_node, target, maxDist)
-
         nodesVisited += temp2.nodesVisited
         # 如果另一个子结点内存在更近距离
         if temp2.nearestDistance < dist:
@@ -124,19 +113,15 @@ def findNearest(tree, point, result):
             nearest = temp2.nearestPoint
             # 更新最近距离
             dist = temp2.nearestDistance
-
         return result(nearest, dist, nodesVisited)
-
     # 从根节点开始递归
     return travel(tree.root, point, float("inf"))
 
 
 if __name__ == '__main__':
-
     # 对构建好的kd树进行搜索，寻找与目标点最近的样本点
     # 定义一个 namedtuple ，分别存放最近坐标点、最近距离和访问过的节点数
     result = namedtuple("Result", "nearestPoint  nearestDistance  nodesVisited")
-
     data = np.array([[5.1, 3.5, 1],
                      [4.9, 3.0, 1],
                      [4.7, 3.2, 1],
@@ -147,11 +132,8 @@ if __name__ == '__main__':
                      [6.3, 2.8, -1],
                      [6.5, 3.2, -1],
                      [6.2, 3.0, -1]])
-
     data = data[:, :-1]
-
     kd = KdTree(data)
     preorder(kd.root)
-
     ret = findNearest(kd, [3, 4.5], result)
     print(ret)
