@@ -7,7 +7,7 @@ def kNN(X, X_train, y_train, n):
     # 求前 N 个点到 X 的距离
     knnList = []
     for i in range(len(X_train)):
-        # 计算欧式距离
+        # 计算欧式距离，L2范数
         dist = np.linalg.norm(X - X_train[i], ord=2)
         knnList.append((dist, y_train[i]))
     # 按距离升序排序
