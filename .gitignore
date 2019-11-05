@@ -1,3 +1,6 @@
 .idea/
 *.xml
 *.iml
+*.code-workspace
+.vscode/
+*.json
