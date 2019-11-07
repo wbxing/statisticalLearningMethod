@@ -48,8 +48,10 @@
 1. 策略
     - 策略实际上就是学习或者选择最优模型的准测
     - 损失函数
-      - 0-1损失函数: $L(Y,f(X)) = \begin{cases}1,& \text(Y \neq f(X));\\
-                                              0,& \text(Y = f(X).\end{cases}$
+      - 0-1损失函数: $L(Y,f(X)) = \begin{cases}
+                     1,& \text(Y \neq f(X));\\
+                     0,& \text(Y = f(X).
+                     \end{cases}$
       - 平方损失函数: $L(Y,f(X)) = (Y - f(X))^2$
       - 绝对损失函数: $L(Y,f(X)) = |Y - f(X)|$
       - 对数损失函数: $L(Y,f(X)) = -log P(Y|X)$
