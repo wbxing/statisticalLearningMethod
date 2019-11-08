@@ -24,6 +24,6 @@
     - 感知机模型: $f(x) = sign(w·x + b)$
     1. 选取初始的 $w_0, b_0$
     1. 在 `T` 中选取数据点 $(x_i, y_i)$
-    1. 如果 $y_i(w·x_i + b) <= 0$ : $$w \gets w+ \eta y_{i}x_{i}$$, $$b \gets b+ \eta y_{i}$$
+    1. 如果 $y_i(w·x_i + b) <= 0$ : $$w \gets w+ \eta y_{i}x_{i}$$ $$b \gets b+ \eta y_{i}$$
     1. 转至 2 ，直至训练集中没有误分类点
   
